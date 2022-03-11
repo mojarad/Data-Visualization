@@ -1,0 +1,315 @@
+# In[1]:
+
+
+import matplotlib.pyplot as plt
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+
+# # Functional method
+
+# In[2]:
+
+
+import numpy as np
+x = np.linspace(0, 5, 11)
+y = x ** 2
+
+
+# In[3]:
+
+
+x
+
+
+# In[4]:
+
+
+y
+
+
+# In[5]:
+
+
+plt.plot(x, y, 'r') # 'r' is the color red
+plt.xlabel('X Axis Title Here')
+plt.ylabel('Y Axis Title Here')
+plt.title('String Title Here')
+plt.show()
+
+
+# In[6]:
+
+
+# plt.subplot(nrows, ncols, plot_number)
+plt.subplot(1,2,1)
+plt.plot(x, y, 'r--')
+plt.subplot(1,2,2)
+plt.plot(y, x, 'g*-');
+
+
+# # Object Oriented Method
+
+# The main idea in using the more formal Object Oriented method is to create figure objects and then just call methods or attributes off of that object.
+
+# In[7]:
+
+
+# Create Figure (empty canvas)
+fig = plt.figure()
+
+# Add set of axes to figure
+axes = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # left, bottom, width, height (range 0 to 1)
+
+# Plot on that set of axes
+axes.plot(x, y, 'b')
+axes.set_xlabel('Set X Label') # Notice the use of set_ to begin methods
+axes.set_ylabel('Set y Label')
+axes.set_title('Set Title')
+
+
+# In[8]:
+
+
+# Creates blank canvas
+fig = plt.figure()
+
+axes1 = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # main axes
+axes2 = fig.add_axes([0.2, 0.5, 0.4, 0.3]) # inset axes
+
+# Larger Figure Axes 1
+axes1.plot(x, y, 'b')
+axes1.set_xlabel('X_label_axes2')
+axes1.set_ylabel('Y_label_axes2')
+axes1.set_title('Axes 2 Title')
+
+# Insert Figure Axes 2
+axes2.plot(y, x, 'r')
+axes2.set_xlabel('X_label_axes2')
+axes2.set_ylabel('Y_label_axes2')
+axes2.set_title('Axes 2 Title');
+
+
+# ### Figure size, aspect ratio and DPI
+
+# In[9]:
+
+
+fig = plt.figure(figsize=(8,4), dpi=100)
+
+
+# In[10]:
+
+
+fig.savefig("filename.png")
+
+
+# In[11]:
+
+
+fig.savefig("filename.png", dpi=200)
+
+
+# #### Legends
+
+# In[12]:
+
+
+fig = plt.figure()
+
+ax = fig.add_axes([0,0,1,1])
+
+ax.plot(x, x**2, label="x**2")
+ax.plot(x, x**3, label="x**3")
+ax.legend()
+
+
+# In[13]:
+
+
+# Lots of options....
+
+ax.legend(loc=1) # upper right corner
+ax.legend(loc=2) # upper left corner
+ax.legend(loc=3) # lower left corner
+ax.legend(loc=4) # lower right corner
+
+
+ax.legend(loc=0) # let matplotlib decide the optimal location
+fig
+
+
+# In[14]:
+
+
+fig, ax = plt.subplots(figsize=(12,6))
+
+ax.plot(x, x+1, color="red", linewidth=0.25)
+ax.plot(x, x+2, color="red", linewidth=0.50)
+ax.plot(x, x+3, color="red", linewidth=1.00)
+ax.plot(x, x+4, color="red", linewidth=2.00)
+
+# possible linestype options ‘-‘, ‘–’, ‘-.’, ‘:’, ‘steps’
+ax.plot(x, x+5, color="green", lw=3, linestyle='-')
+ax.plot(x, x+6, color="green", lw=3, ls='-.')
+ax.plot(x, x+7, color="green", lw=3, ls=':')
+
+# custom dash
+line, = ax.plot(x, x+8, color="black", lw=1.50)
+line.set_dashes([5, 10, 15, 10]) # format: line length, space length, ...
+
+# possible marker symbols: marker = '+', 'o', '*', 's', ',', '.', '1', '2', '3', '4', ...
+ax.plot(x, x+ 9, color="blue", lw=3, ls='-', marker='+')
+ax.plot(x, x+10, color="blue", lw=3, ls='--', marker='o')
+ax.plot(x, x+11, color="blue", lw=3, ls='-', marker='s')
+ax.plot(x, x+12, color="blue", lw=3, ls='--', marker='1')
+
+# marker size and color
+ax.plot(x, x+13, color="purple", lw=1, ls='-', marker='o', markersize=2)
+ax.plot(x, x+14, color="purple", lw=1, ls='-', marker='o', markersize=4)
+ax.plot(x, x+15, color="purple", lw=1, ls='-', marker='o', markersize=8, markerfacecolor="red")
+ax.plot(x, x+16, color="purple", lw=1, ls='-', marker='s', markersize=8, 
+        markerfacecolor="yellow", markeredgewidth=3, markeredgecolor="green");
+
+
+# In[15]:
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# In[16]:
+
+
+years = [1960, 1970, 1980, 1990, 2000, 2010, 2016]
+iran_pop = [21.91, 28.51, 38.67, 56.23, 66.13, 74.57, 80.28]
+
+
+# # Line Plot
+
+# In[17]:
+
+
+plt.plot(years, iran_pop)
+plt.show()
+
+
+# # Scatter Plot
+
+# In[18]:
+
+
+plt.scatter(years, iran_pop)
+plt.show()
+
+
+# # Histogram Plot
+
+# In[19]:
+
+
+city_name = ['Tehran', 'Mashhad', 'Isfahan', 'Karaj', 'Tabriz', 'Shiraz']
+city_pop = [7153309, 2307177, 1547164, 1448075, 1424641, 1249942]
+
+
+# In[20]:
+
+
+plt.hist(city_pop)
+plt.show()
+
+
+# # Pie Chart
+
+# In[21]:
+
+
+plt.pie(city_pop,labels=['Tehran', 'Mashhad', 'Isfahan', 'Karaj', 'Tabriz', 'Shiraz'] )
+plt.show()
+
+
+# # Customization plots
+
+# ## Customize Line Plot
+
+# In[22]:
+
+
+plt.figure(figsize=(11, 8), dpi=40)
+plt.plot(years, iran_pop, color='green')
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.title('Iran\'s Population')
+plt.yticks([21.91, 28.51, 38.67, 56.23, 66.13, 74.57, 80.28],['21M','28M','38M','56M','66M','74M','80M'])
+plt.xticks([1960, 1970, 1980, 1990, 2000, 2010, 2016] )
+plt.show()
+
+
+# ## Customize Scatter plot
+
+# In[23]:
+
+
+popsize = np.array(iran_pop)*3
+plt.scatter(years, iran_pop, s=popsize)
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.title('Iran\'s Population')
+plt.yticks([21.91, 28.51, 38.67, 56.23, 66.13, 74.57, 80.28],['21M','28M','38M','56M','66M','74M','80M'])
+plt.xticks([1960, 1970, 1980, 1990, 2000, 2010, 2016] )
+plt.show()
+
+
+# In[24]:
+
+
+pop_size = np.array([7153309, 2307177, 1547164, 1448075, 1424641, 1249942])/30000
+Colors = ['violet', 'green', 'orange', 'tomato', 'blue', 'pink']
+plt.scatter(np.arange(6),city_pop, s=pop_size,c=Colors, alpha=1)
+plt.xticks([0, 1, 2, 3, 4, 5],['Tehran', 'Mashhad', 'Isfahan', 'Karaj', 'Tabriz', 'Shiraz'],rotation=60,fontsize='large')
+plt.yticks([1000000, 2000000, 7000000],['1M','2M','7M'])
+plt.title('Iran\'s most populated city')
+plt.text(0,7153309,'iran Capital',fontsize=15)
+plt.ylim([0,8000000])
+plt.show()
+
+
+# # Multiple Plot
+
+# In[25]:
+
+
+iran_pop = [21.91, 28.51, 38.67, 56.23, 66.13, 74.57, 80.28]
+turkey_pop = [11.91, 34.51, 38.67, 46.23, 56.13, 81.57, 83.28]
+plt.plot(years, iran_pop,ls='-',lw=2)
+plt.plot(years,turkey_pop,ls='--',lw=1)
+plt.title('Iran vs Turkey Population')
+plt.xlabel('Year')
+plt.ylabel('Population')
+plt.yticks([20,30,40,50,60,70,80],['20M', '30M', '40M', '50M' ,'60M', '70M', '80M'])
+plt.legend(['iran','Turkey'],loc='best')
+plt.grid()
+plt.annotate('Iran–Iraq War',xy=(1980,38.67) ,xytext=(1990,34.88) ,arrowprops=dict(facecolor='silver',width=4),fontsize=15)
+plt.show()
+
+
+# # Subplot
+
+# In[26]:
+
+
+plt.subplot(1,2,1)
+plt.plot(years, iran_pop)
+plt.title('Iran Population')
+plt.subplot(1,2,2)
+plt.plot(years,turkey_pop)
+plt.title('Turkey Population')
+plt.show()
+
+
+# # Saving a plot
+
+# In[27]:
+
+
+plt.savefig('myplot.jpg')

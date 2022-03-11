@@ -1,0 +1,112 @@
+# In[1]:
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
+
+# In[2]:
+
+
+# tips = sns.load_dataset('tips')
+tips = pd.read_csv("tips.csv")
+
+
+# In[3]:
+
+
+sns.distplot(tips['total_bill'])
+
+
+# In[4]:
+
+
+sns.distplot(tips['total_bill'],kde=False,bins=30)
+
+
+# In[5]:
+
+
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='scatter')
+
+
+# In[6]:
+
+
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='hex')
+
+
+# In[7]:
+
+
+sns.jointplot(x='total_bill',y='tip',data=tips,kind='reg')
+
+
+# In[8]:
+
+
+sns.pairplot(tips)
+
+
+# In[9]:
+
+
+sns.pairplot(tips,hue='sex',palette='coolwarm')
+
+
+# In[10]:
+
+
+sns.barplot(x='sex',y='total_bill',data=tips)
+
+
+# In[11]:
+
+
+sns.countplot(x='sex',data=tips)
+
+
+# In[12]:
+
+
+sns.boxplot(x="day", y="total_bill", data=tips,palette='rainbow')
+
+
+# In[13]:
+
+
+sns.boxplot(data=tips,palette='rainbow',orient='h')
+
+
+# In[14]:
+
+
+sns.boxplot(x="day", y="total_bill", hue="smoker",data=tips, palette="coolwarm")
+
+
+# In[15]:
+
+
+sns.violinplot(x="day", y="total_bill", data=tips,palette='rainbow')
+
+
+# In[16]:
+
+
+sns.stripplot(x="day", y="total_bill", data=tips)
+
+
+# In[17]:
+
+
+sns.swarmplot(x="day", y="total_bill", data=tips)
+
+
+# In[18]:
+
+
+sns.violinplot(x="tip", y="day", data=tips,palette='rainbow')
+sns.swarmplot(x="tip", y="day", data=tips,color='black',size=3)
+
